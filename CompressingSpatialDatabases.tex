@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amssymb,amsmath}
+\usepackage{fullpage}
+\usepackage{epsfig}
+\usepackage[usenames]{color}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+\newtheorem{Thm}{Theorem}
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Cor}[Thm]{Corollary}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Claim}[Thm]{Claim}
+\newtheorem{lemma}{Lemma}
+\newtheorem{Observation}{Observation}
+\newtheorem{theorem}{Theorem}
+\newenvironment{proof}{\noindent {\sc Proof:}}{$\Box$ \medskip}
+
+\newtheorem{Ex}{Exercise}
+\newtheorem{Exa}{Example}
+\newtheorem{Rem}{Remark}
+\newtheorem{assumption}{Assumption}
+
+\newcommand{\calA}{{\mathcal{A}}}
+\newcommand{\calP}{{\mathcal{P}}}
+\newcommand{\kc}[1]{\noindent {\color{red}{{\smallskip \textbf{KC: }}#1}}}
+\newcommand{\djh}[1]{{\color{cyan} \{\textbf{YF: }#1\}}}
+\newcommand{\bbR}{{\mathbf{R}}}
+\newcommand{\disth}[1]{d_{\operatorname{ham}}(#1)}
+\newcommand{\distp}[1]{d_{\operatorname{prok}}(#1)}
+\newcommand{\calX}{{\mathcal{X}}}
+\newcommand{\calF}{{\mathcal{F}}}
+\newcommand{\bbE}{{\mathbb{E}}}
+
+\newcommand{\err}{\mathbf{err}}
+\newcommand{\calH}{\mathcal{H}}
+
+\title{Compressing spatio-temporal databases}
+
+\begin{document}
+
+\maketitle
+
+\section{Motivation}
+Suppose we want to study the effect of environmental variables, such
+as pollution and noise, on people's health. To collect data we use
+smart-phones instrumented with sensors that measure both the state of
+the environment (time, GPS-based location, temperture, noise,
+pollutants etc.)  and the state of the person carrying them
+(heart-rate, coughing, oxygen in blood etc.)
+
+Our goal is to identify the main dependencies between these variables.
+In order to reliably detect dependencies we need to
+bin/group/discretize/quantize time and space. Without such binning it
+is very difficult to relate different measurements to each other.
+
+One of the challanges with binning is that spatial density is likely
+to be very uneven. The density of people in the mall on Christmas eve
+is much higher than the density of people on a remote mountain top at
+the same time.
+
+Here we propose a data-driven binning method that adapts to the
+local density of measurements in time and location.
+
+\section{Data-driven partitions} 
+Suppose we represent our measurements as triplets of the form
+$(x,t,f)$ where $x$ denotes location, $t$ denotes time and $f$
+represents the vector of measurements taken at location $x$ at time
+$t$.
+
+Suppose we have collection of $n$ measurements
+$(x_1,t_1,f_1),\ldots,(x_n,t_n,f_n)$. the simplest way of constructing
+a data-sensitive partition into $m$ bins is to select $m$ out of the
+$n$ measurements at random. These $m$ elements are called the
+``centroids''. The measurement $(x,t,f)$ is placed into the bin
+corresponding to the centroid whose location is closest to $x$ in
+euclidean distance.
+
+As the partition is randomized, it is often necessary to create
+several independent partitions and average the results over all of
+them.
+ 
+\end{document}

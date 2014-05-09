@@ -146,6 +146,65 @@ Our plan is therefor to partition the signal from a sensor (or a set
 of sensors) into the useless and uncompressible noise part and the
 useful and compressible signal and noise-amplitude part.
 
+\section{What is a model?}
+
+A model is a mathematical representation of the world. It represents
+a simplified description of the state of the physical world. 
+
+The physical world has a natural four dimensional coordinate system:
+$X,Y,Z$ and $T$. A model is a mapping (a function) from $(x,y,z,t)$ to
+some quantity $q$. The quantity can be a scalar (i.e. temperature) or a
+vector (i.e. the energy distribution over a range of frequencies).
+
+Consider, for example, a model of the temperature in UCSD. Many
+different types of models are possible: A discrete model that
+partitions space into rooms might be appropriate for indoor spaces
+while a model that defines temperature as a continuous function of
+time and space (such as a linear combination of wavelets) might be
+better for outdoor areas. The time resolution might also depend on the
+application. 
+
+What is common to all models is that the defines the temperature for
+a continuous range of locations and times. I guess this is what is
+meant in the following sections by equating models with an abstract
+``View''.
+
+{\bf Measurements} are a different type of animal altogether. All of
+our measurements, taken together, corresponds to just a finite set of
+points in 4D space, and typically the density of the points is far
+from uniform: some regions have many measurements while others
+none at all.
+
+Invariably, we will not be able to point to a unique single model.
+The fewer the measurements, the larger the uncertainty. The more
+data we have, the more restricted the set of {\bf acceptable} models.
+The trick is that not all measurements are equally useful. Some
+sensors malfunction, some have higher noise level than others and some
+are placed at an unrepresentative location (for example, a temperature
+guage that is placed right next to a stove). We therefor seek a model
+that explains {\em a significant fraction} of the sensor data rather
+than all of it.
+
+Coming back to the temperature example. Suppose we have a model of all
+rooms in UCSD that contains parameters that capture the heat
+transfer between neighboring rooms and between the rooms and the
+outside of the building. These parameters would be, by and large,
+fixed for all time. We can then use this model to encode the
+temperatures in the rooms. The compression rate would be high {\bf
+  but} there will be some rooms where the model does not fit at all
+and those will not be compressed. The question then becomes whether
+the consumer needs to be given the noisy signal or whether s/he just
+needs to be told that this signal is ignored because it is too far
+from the predictions of the mode. In a world where sensors are cheap
+but maintaining them is expensive the second option might be better.
+
+Bottom line: I believe that when we measure the quality of a
+compression scheme we should require is high compression and low error
+on a {\em fraction} of the data, and that the fraction be
+statistically significant, by which I mean, the probability of having
+this level of compression by chance is extremely small.
+
+
 \section{Approximate Views as an abstract data type}
 
 Here is an attempt to formalize the relationship between a physical
